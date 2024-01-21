@@ -16,7 +16,17 @@ const success = (message='', data = [], status =200) => {
     }
 }
 
+const error = (message, error=[], status =500) =>{
+    return {
+        message,
+        error,
+        status
+    }
+}
 
+app.get('/', (req, res)=>{
+    res.send(success("Hello Working"))
+})
 //routes
 app.post('/post', async(req, res)=>{
     try {
@@ -25,7 +35,7 @@ app.post('/post', async(req, res)=>{
 
     } catch (error) {   
         console.log(error.message)
-        res.status(500).json({message: error.message})
+        res.status(500).json(error(error.message))
     }
 })
 
