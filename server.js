@@ -33,11 +33,13 @@ app.post('/product', async(req, res)=>{
         const product = await Product.create(req.body)
         res.status(200).send(success("product created successfully",product))
 
-    } catch (error) {   
-        console.log(error.message)
-        res.status(500).json(error(error.message))
+    } catch (err) {   
+        console.log(err.message)
+        res.status(500).json(error(err.message))
     }
 })
+
+
 
 mongoose.connect("mongodb+srv://sloovi:"+ mongodbPassword.MongoPassword+"@template.t6v0y.mongodb.net/Node-API?retryWrites=true&w=majority")
 .then(()=>{
