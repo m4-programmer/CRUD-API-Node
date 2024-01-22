@@ -52,7 +52,7 @@ app.post('/product', async(req, res)=>{
 app.get('/product/:id', async(req, res)=>{
     try {
         const {id} = req.params
-        const product = await Product.find({_id:id})
+        const product = await Product.findById(id)
         res.send(success("product retrieved successfully", product))
 
     } catch (err) {   
