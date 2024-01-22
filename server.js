@@ -28,7 +28,7 @@ app.get('/', (req, res)=>{
     res.send(success("Hello Working"))
 })
 //routes
-app.post('/post', async(req, res)=>{
+app.post('/product', async(req, res)=>{
     try {
         const product = await Product.create(req.body)
         res.status(200).send(success("product created successfully",product))
