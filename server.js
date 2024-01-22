@@ -61,6 +61,21 @@ app.get('/product/:id', async(req, res)=>{
     }
 })
 
+app.put('/product/:id', async(req, res)=>{
+    try {
+        const {id} = req.params
+        const product = await Product.findByIdAndUpdate(id, req.body);
+        if (!product) {
+            res.status(404).json(error("product not found", [], 404))
+        }
+        const updatedProduct = await Product.findById(id)
+        res.send(success("product updated successfully", updatedProduct))
+
+    } catch (err) {   
+        console.log(err.message)
+        res.status(500).json(error(err.message))
+    }
+})
 
 
 mongoose.connect("mongodb+srv://sloovi:"+ mongodbPassword.MongoPassword+"@template.t6v0y.mongodb.net/Node-API?retryWrites=true&w=majority")
