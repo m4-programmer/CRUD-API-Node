@@ -49,6 +49,18 @@ app.post('/product', async(req, res)=>{
     }
 })
 
+app.get('/product/:id', async(req, res)=>{
+    try {
+        const {id} = req.params
+        const product = await Product.find({_id:id})
+        res.send(success("product retrieved successfully", product))
+
+    } catch (err) {   
+        console.log(err.message)
+        res.status(500).json(error(err.message))
+    }
+})
+
 
 
 mongoose.connect("mongodb+srv://sloovi:"+ mongodbPassword.MongoPassword+"@template.t6v0y.mongodb.net/Node-API?retryWrites=true&w=majority")
